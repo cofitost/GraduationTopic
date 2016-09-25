@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.rabbit.login.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <TextView
+        android:id="@+id/tv_ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_ID"
+        android:textSize="25sp"
+        android:layout_marginLeft="25sp"
+        android:layout_marginTop="30sp"
+        />
+
+    <EditText
+        android:id="@+id/ET_IDInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:layout_below="@+id/tv_ID"
+        android:layout_alignLeft="@+id/tv_ID"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="25sp" />
+
+    <TextView
+        android:id="@+id/tv_PWD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_PWD"
+        android:textSize="25sp"
+        android:layout_below="@+id/ET_IDInput"
+        android:layout_marginLeft="25sp"
+        android:layout_marginTop="20sp"
+        />
+
+    <EditText
+        android:id="@+id/ET_PWDInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:layout_below="@+id/tv_PWD"
+        android:layout_alignLeft="@+id/tv_PWD"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="25sp"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/BT_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/BT_login"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:layout_below="@id/ET_PWDInput"
+        android:layout_marginTop="15sp"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/BT_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/BT_refresh"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:layout_below="@+id/BT_login"
+        android:layout_marginTop="20sp"
+        android:layout_alignLeft="@+id/ET_PWDInput"/>
+
+    <Button
+        android:id="@+id/BT_signUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/BT_signUp"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:layout_below="@+id/BT_login"
+        android:layout_marginTop="20sp"
+        android:layout_alignRight="@+id/ET_PWDInput"/>
+
+</RelativeLayout>
