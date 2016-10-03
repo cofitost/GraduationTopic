@@ -7,7 +7,7 @@
     <string name="BT_login">Login</string>
     <string name="BT_refresh">Refresh</string>
     <string name="BT_signUp">Sign up</string>
-    <string name="tv_signUp_accountNumber">Accuont Number:</string>
+    <string name="tv_signUp_accountNumber">Account Number:</string>
     <string name="tv_signUp_name">Name:</string>
     <string name="tv_signUp_PWD">Password:</string>
     <string name="tv_signUp_checkPWD">Enter your password again:</string>
@@ -19,4 +19,6 @@
     <string name="BT_seminarOrganizers">Seminar Organizers</string>
     <string name="title_activity_seminar_organizers">SeminarOrganizers</string>
     <string name="tv_signUp_phone">Phone</string>
+    <string name="tv_organizersignUp_name">Organization Name:</string>
+    <string name="tv_signUp_principal">Principal:</string>
 </resources>

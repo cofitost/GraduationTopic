@@ -8,9 +8,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 
 public class CommonUser extends AppCompatActivity {
 
+    EditText accountNumber,username,password,email,phone;
     Button done,cancel;
 
     @Override
@@ -19,6 +21,12 @@ public class CommonUser extends AppCompatActivity {
         setContentView(R.layout.activity_common_user);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        accountNumber = (EditText)findViewById(R.id.ET_signUp_accountNumber);
+        username = (EditText)findViewById(R.id.ET_signUp_name);
+        password = (EditText)findViewById(R.id.ET_signUp_PWD);
+        email = (EditText)findViewById(R.id.ET_signUp_email);
+        phone = (EditText)findViewById(R.id.ET_signUp_phone);
 
         done = (Button)findViewById(R.id.BT_signUp_done);
         done.setOnClickListener(DO);
@@ -30,6 +38,13 @@ public class CommonUser extends AppCompatActivity {
     public OnClickListener DO = new OnClickListener() {
         @Override
         public void onClick(View v) {
+
+            String str_accountNumber = accountNumber.getText().toString();
+            String str_username = username.getText().toString();
+            String str_password = password.getText().toString();
+            String str_email = email.getText().toString();
+            String str_phone = phone.getText().toString();
+
             Intent intent = new Intent();
             intent.setClass(CommonUser.this,MainActivity.class);
             startActivity(intent);
