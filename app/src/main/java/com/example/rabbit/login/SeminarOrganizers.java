@@ -42,15 +42,8 @@ public class SeminarOrganizers extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            String str_accountNumber = accountNumber.getText().toString();
-            String str_username = username.getText().toString();
-            String str_password = password.getText().toString();
-            String str_email = email.getText().toString();
-            String str_phone = phone.getText().toString();
-            String str_principal = principal.getText().toString();
-
-            OrganizerThread thread = new OrganizerThread(SeminarOrganizers.this,str_accountNumber,str_username,str_password,str_principal,str_email,str_phone);
-            //thread.start();
+            PostOrganizers post = new PostOrganizers();
+            post.onPost();
 
             Intent intent = new Intent();
             intent.setClass(SeminarOrganizers.this,MainActivity.class);

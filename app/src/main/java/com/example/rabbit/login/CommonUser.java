@@ -39,11 +39,8 @@ public class CommonUser extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            String str_accountNumber = accountNumber.getText().toString();
-            String str_username = username.getText().toString();
-            String str_password = password.getText().toString();
-            String str_email = email.getText().toString();
-            String str_phone = phone.getText().toString();
+            PostCommon post = new PostCommon();
+            post.onPost();
 
             Intent intent = new Intent();
             intent.setClass(CommonUser.this,MainActivity.class);
