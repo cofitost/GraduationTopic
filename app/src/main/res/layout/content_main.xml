@@ -12,25 +12,46 @@
     tools:context="com.example.rabbit.login.MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <ImageView
+        android:id="@+id/iv_ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/iconhead5"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/iv_PWD"
+        android:layout_marginTop="30sp"
+        />
+
     <TextView
         android:id="@+id/tv_ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tv_ID"
         android:textSize="25sp"
-        android:layout_marginLeft="25sp"
-        android:layout_marginTop="30sp"
-        />
+        android:layout_marginLeft="5sp"
+        android:layout_marginBottom="10sp"
+        android:layout_toEndOf="@+id/iv_ID"
+        android:layout_above="@+id/ET_IDInput"
+        android:textColor="#9955FF"/>
 
     <EditText
         android:id="@+id/ET_IDInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:layout_below="@+id/tv_ID"
-        android:layout_alignLeft="@+id/tv_ID"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="25sp" />
+        android:layout_below="@+id/iv_ID"
+        android:layout_alignStart="@+id/iv_ID"
+        android:layout_alignEnd="@+id/ET_PWDInput" />
+
+    <ImageView
+        android:id="@+id/iv_PWD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/iconlock2"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/ET_IDInput"
+        />
 
     <TextView
         android:id="@+id/tv_PWD"
@@ -38,18 +59,19 @@
         android:layout_height="wrap_content"
         android:text="@string/tv_PWD"
         android:textSize="25sp"
-        android:layout_below="@+id/ET_IDInput"
-        android:layout_marginLeft="25sp"
-        android:layout_marginTop="20sp"
-        />
+        android:layout_marginLeft="5sp"
+        android:layout_marginBottom="10sp"
+        android:layout_above="@+id/ET_PWDInput"
+        android:layout_toEndOf="@+id/iv_PWD"
+        android:textColor="#9955FF"/>
 
     <EditText
         android:id="@+id/ET_PWDInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:layout_below="@+id/tv_PWD"
-        android:layout_alignLeft="@+id/tv_PWD"
+        android:layout_below="@+id/iv_PWD"
+        android:layout_alignLeft="@+id/iv_PWD"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="25sp"
         android:inputType="textPassword" />
@@ -60,6 +82,8 @@
         android:layout_height="wrap_content"
         android:text="@string/BT_login"
         android:textSize="20sp"
+        android:background="#9955FF"
+        android:textColor="#FFFFFF"
         android:textAllCaps="false"
         android:layout_below="@id/ET_PWDInput"
         android:layout_marginTop="15sp"
@@ -72,6 +96,8 @@
         android:text="@string/BT_refresh"
         android:textSize="20sp"
         android:textAllCaps="false"
+        android:background="#9955FF"
+        android:textColor="#FFFFFF"
         android:layout_below="@+id/BT_login"
         android:layout_marginTop="20sp"
         android:layout_alignLeft="@+id/ET_PWDInput"/>
@@ -83,8 +109,13 @@
         android:text="@string/BT_signUp"
         android:textSize="20sp"
         android:textAllCaps="false"
+        android:background="#9955FF"
+        android:textColor="#FFFFFF"
         android:layout_below="@+id/BT_login"
         android:layout_marginTop="20sp"
         android:layout_alignRight="@+id/ET_PWDInput"/>
+
+
+
 
 </RelativeLayout>

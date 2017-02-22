@@ -27,7 +27,8 @@
                 android:text="@string/tv_signUp_accountNumber"
                 android:textSize="25sp"
                 android:layout_marginLeft="25sp"
-                android:layout_marginTop="30sp"/>
+                android:layout_marginTop="30sp"
+                android:textColor="#9955FF"/>
 
             <EditText
                 android:id="@+id/ET_signUp_accountNumber"
@@ -47,7 +48,8 @@
                 android:textSize="25sp"
                 android:layout_below="@+id/ET_signUp_accountNumber"
                 android:layout_marginLeft="25sp"
-                android:layout_marginTop="20sp"/>
+                android:layout_marginTop="20sp"
+                android:textColor="#9955FF"/>
 
             <EditText
                 android:id="@+id/ET_signUp_name"
@@ -67,7 +69,8 @@
                 android:textSize="25sp"
                 android:layout_below="@+id/ET_signUp_name"
                 android:layout_marginLeft="25sp"
-                android:layout_marginTop="20sp"/>
+                android:layout_marginTop="20sp"
+                android:textColor="#9955FF"/>
 
             <EditText
                 android:id="@+id/ET_signUp_PWD"
@@ -88,7 +91,8 @@
                 android:textSize="20sp"
                 android:layout_below="@+id/ET_signUp_PWD"
                 android:layout_marginLeft="25sp"
-                android:layout_marginTop="20sp"/>
+                android:layout_marginTop="20sp"
+                android:textColor="#9955FF"/>
 
             <EditText
                 android:id="@+id/ET_signUp_checkPWD"
@@ -109,7 +113,8 @@
                 android:textSize="20sp"
                 android:layout_below="@+id/ET_signUp_checkPWD"
                 android:layout_marginLeft="25sp"
-                android:layout_marginTop="20sp"/>
+                android:layout_marginTop="20sp"
+                android:textColor="#9955FF"/>
 
             <EditText
                 android:id="@+id/ET_signUp_email"
@@ -129,7 +134,8 @@
                 android:textSize="20sp"
                 android:layout_below="@+id/ET_signUp_email"
                 android:layout_marginLeft="25sp"
-                android:layout_marginTop="20sp"/>
+                android:layout_marginTop="20sp"
+                android:textColor="#9955FF"/>
 
             <EditText
                 android:id="@+id/ET_signUp_phone"
@@ -149,7 +155,9 @@
                 android:textSize="20sp"
                 android:textAllCaps="false"
                 android:layout_below="@+id/ET_signUp_phone"
-                android:layout_marginLeft="30sp"/>
+                android:layout_marginLeft="30sp"
+                android:background="#9955FF"
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/BT_signUp_cancel"
@@ -160,7 +168,9 @@
                 android:textAllCaps="false"
                 android:layout_below="@+id/ET_signUp_phone"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="30sp"/>
+                android:layout_marginRight="30sp"
+                android:background="#9955FF"
+                android:textColor="#FFFFFF"/>
 
         </RelativeLayout>
 

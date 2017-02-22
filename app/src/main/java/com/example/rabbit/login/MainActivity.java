@@ -21,12 +21,14 @@ public class MainActivity extends AppCompatActivity {
     Button login,signUp,refresh;
     EditText id,password;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         login = (Button)findViewById(R.id.BT_login);
         login.setOnClickListener(LO);
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         password = (EditText)findViewById(R.id.ET_PWDInput);
     }
+
 
     public OnClickListener LO = new OnClickListener() {
         @Override

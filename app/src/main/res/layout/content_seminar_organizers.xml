@@ -27,7 +27,8 @@
                 android:text="@string/tv_signUp_accountNumber"
                 android:textSize="25sp"
                 android:layout_marginLeft="25sp"
-                android:layout_marginTop="30sp"/>
+                android:layout_marginTop="30sp"
+                android:textColor="#9955FF"/>
 
             <EditText
                 android:id="@+id/ET_organizersignUp_accountNumber"
@@ -47,7 +48,8 @@
                 android:textSize="25sp"
                 android:layout_below="@+id/ET_organizersignUp_accountNumber"
                 android:layout_marginLeft="25sp"
-                android:layout_marginTop="20sp"/>
+                android:layout_marginTop="20sp"
+                android:textColor="#9955FF"/>
 
             <EditText
                 android:id="@+id/ET_organizersignUp_name"
@@ -67,7 +69,8 @@
                 android:textSize="25sp"
                 android:layout_below="@+id/ET_organizersignUp_name"
                 android:layout_marginLeft="25sp"
-                android:layout_marginTop="20sp"/>
+                android:layout_marginTop="20sp"
+                android:textColor="#9955FF"/>
 
             <EditText
                 android:id="@+id/ET_organizersignUp_PWD"
@@ -88,7 +91,8 @@
                 android:textSize="20sp"
                 android:layout_below="@+id/ET_organizersignUp_PWD"
                 android:layout_marginLeft="25sp"
-                android:layout_marginTop="20sp"/>
+                android:layout_marginTop="20sp"
+                android:textColor="#9955FF"/>
 
             <EditText
                 android:id="@+id/ET_organizersignUp_checkPWD"
@@ -109,7 +113,8 @@
                 android:textSize="20sp"
                 android:layout_below="@+id/ET_organizersignUp_checkPWD"
                 android:layout_marginLeft="25sp"
-                android:layout_marginTop="20sp"/>
+                android:layout_marginTop="20sp"
+                android:textColor="#9955FF"/>
 
             <EditText
                 android:id="@+id/ET_organizersignUp_principal"
@@ -130,7 +135,8 @@
                 android:textSize="20sp"
                 android:layout_below="@+id/ET_organizersignUp_principal"
                 android:layout_marginLeft="25sp"
-                android:layout_marginTop="20sp"/>
+                android:layout_marginTop="20sp"
+                android:textColor="#9955FF"/>
 
             <EditText
                 android:id="@+id/ET_organizersignUp_email"
@@ -150,7 +156,8 @@
                 android:textSize="20sp"
                 android:layout_below="@+id/ET_organizersignUp_email"
                 android:layout_marginLeft="25sp"
-                android:layout_marginTop="20sp"/>
+                android:layout_marginTop="20sp"
+                android:textColor="#9955FF"/>
 
             <EditText
                 android:id="@+id/ET_organizersignUp_phone"
@@ -170,7 +177,9 @@
                 android:textSize="20sp"
                 android:textAllCaps="false"
                 android:layout_below="@+id/ET_organizersignUp_phone"
-                android:layout_marginLeft="30sp"/>
+                android:layout_marginLeft="30sp"
+                android:background="#9955FF"
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/BT_organizersignUp_cancel"
@@ -181,7 +190,9 @@
                 android:textAllCaps="false"
                 android:layout_below="@+id/ET_organizersignUp_phone"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="30sp"/>
+                android:layout_marginRight="30sp"
+                android:background="#9955FF"
+                android:textColor="#FFFFFF"/>
 
         </RelativeLayout>
     </ScrollView>
