@@ -2,15 +2,18 @@ package com.example.rabbit.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
-import android.view.View.OnClickListener;
-import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import org.altbeacon.beacon.*;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -28,53 +31,70 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommonUser extends AppCompatActivity {
+public class MainInterface extends AppCompatActivity implements BeaconConsumer{
 
-    EditText accountNumber,userName,password,email,phone;
-    Button done,cancel;
+    protected static final String TAG = "MA";
+    private BeaconManager bm;
+    String UUID = "B5B182C7-EAB1-4988-AA99-B5C1517008D9";
+    String Major = "1";
+    String Minor = "39295";
+    Region region1 = new Region("myMonitoringUniqueId",Identifier.parse(UUID),Identifier.parse(Major),Identifier.parse(Minor));
+    TextView welcome;
+    Toast toast;
+    String result = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_common_user);
+        setContentView(R.layout.activity_main_interface);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        accountNumber = (EditText)findViewById(R.id.ET_signUp_accountNumber);
-        userName = (EditText)findViewById(R.id.ET_signUp_name);
-        password = (EditText)findViewById(R.id.ET_signUp_PWD);
-        email = (EditText)findViewById(R.id.ET_signUp_email);
-        phone = (EditText)findViewById(R.id.ET_signUp_phone);
+        welcome = (TextView)findViewById(R.id.tv_welcome);
 
-        done = (Button)findViewById(R.id.BT_signUp_done);
-        done.setOnClickListener(DO);
-
-        cancel = (Button)findViewById(R.id.BT_signUp_cancel);
-        cancel.setOnClickListener(CA);
+        bm = BeaconManager.getInstanceForApplication(this);
+        bm.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
+        bm.bind(this);
     }
 
-    public OnClickListener DO = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bm.unbind(this);
+    }
 
-            onPost();
+    @Override
+    public void onBeaconServiceConnect() {
+        bm.addMonitorNotifier(new MonitorNotifier() {
+            @Override
+            public void didEnterRegion(Region region) {
+                onPost();
+                Log.i(TAG, "I just saw an beacon for the first time!");
+            }
 
-            Intent intent = new Intent();
-            intent.setClass(CommonUser.this,MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    };
+            @Override
+            public void didExitRegion(Region region) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        welcome.setText("leave");
+                        toast.makeText(MainInterface.this,"Beacon遠離",toast.LENGTH_LONG).show();
+//stuff that updates ui
+                    }
+                });
+                Log.i(TAG, "I no longer see an beacon");
+            }
 
-    public OnClickListener CA = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent();
-            intent.setClass(CommonUser.this,SelectAccountType.class);
-            startActivity(intent);
-            finish();
-        }
-    };
+            @Override
+            public void didDetermineStateForRegion(int i, Region region) {
+                Log.i(TAG, "I have just switched from seeing/not seeing beacons: "+i);
+            }
+        });
+
+        try {
+            bm.startMonitoringBeaconsInRegion(region1);
+        } catch (RemoteException e) {    }
+    }
 
     public void onPost(){
         new Thread(new Runnable() {
@@ -86,7 +106,6 @@ public class CommonUser extends AppCompatActivity {
     }
 
     public void httpPost(){
-        String result = null;
 
         HttpClient client = new DefaultHttpClient();
         try {
@@ -94,11 +113,7 @@ public class CommonUser extends AppCompatActivity {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             //params.add(new BasicNameValuePair("key",value));
             //params.add(new BasicNameValuePair("hour",postHour));
-            params.add(new BasicNameValuePair("accountNumber",accountNumber.getText().toString()));
-            params.add(new BasicNameValuePair("userName",userName.getText().toString()));
-            params.add(new BasicNameValuePair("password",password.getText().toString()));
-            params.add(new BasicNameValuePair("email",email.getText().toString()));
-            params.add(new BasicNameValuePair("phone",phone.getText().toString()));
+            params.add(new BasicNameValuePair("Minor",Minor));
 
             UrlEncodedFormEntity ent = null;
             Log.d("abc",params.toString());
@@ -129,7 +144,7 @@ public class CommonUser extends AppCompatActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK )
         {
             Intent intent = new Intent();
-            intent.setClass(CommonUser.this,SelectAccountType.class);
+            intent.setClass(MainInterface.this,MainActivity.class);
             startActivity(intent);
             finish();
         }
