@@ -39,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
     Button login,signUp,refresh;
     EditText id,password;
-    String result = null;
+    Boolean result = false;
     Handler handler = new Handler();
+    String local = "192.168.43.179:8088/android-backend/webapi/user/login";
+    String web = "http://140.134.26.71:42048/android-backend/webapi/user/login" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,15 +105,18 @@ public class MainActivity extends AppCompatActivity {
 
         HttpClient client = new DefaultHttpClient();
         try {
-            HttpPost post = new HttpPost("140.134.26.71:2048");
+            HttpPost post = new HttpPost(
+                    //local
+                    web
+            );
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             //params.add(new BasicNameValuePair("key",value));
             //params.add(new BasicNameValuePair("hour",postHour));
-            params.add(new BasicNameValuePair("accountNumber",id.getText().toString()));
+            params.add(new BasicNameValuePair("userAccount",id.getText().toString()));
             params.add(new BasicNameValuePair("password",password.getText().toString()));
 
             UrlEncodedFormEntity ent = null;
-            Log.d("abc",params.toString());
+            Log.d("checkthis1",params.toString());
 
             ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
             post.setEntity(ent);
@@ -119,8 +124,8 @@ public class MainActivity extends AppCompatActivity {
             HttpEntity resEntity = responsePOST.getEntity();
 
             if (resEntity != null) {
-                result = EntityUtils.toString(resEntity);
-                Log.d("abcd",result);
+                result = Boolean.parseBoolean(EntityUtils.toString(resEntity));
+                Log.d("checkthis2",result.toString());
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -136,12 +141,12 @@ public class MainActivity extends AppCompatActivity {
     private Runnable check = new Runnable() {//結果寫在這
         @Override
         public void run() {
-            if(result!=null) {
-                handler.removeCallbacks(check);
+            if(result) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this,MainInterface.class);
                 startActivity(intent);
                 finish();
+                handler.removeCallbacks(check);
             }
             else{
                 handler.postDelayed(check,3000);

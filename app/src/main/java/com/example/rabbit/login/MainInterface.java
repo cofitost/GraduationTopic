@@ -42,6 +42,8 @@ public class MainInterface extends AppCompatActivity implements BeaconConsumer{
     TextView welcome;
     Toast toast;
     String result = null;
+    String local = "";
+    String web = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,11 +111,16 @@ public class MainInterface extends AppCompatActivity implements BeaconConsumer{
 
         HttpClient client = new DefaultHttpClient();
         try {
-            HttpPost post = new HttpPost("140.134.26.71:2048");
+            HttpPost post = new HttpPost(
+                    local
+                    //web
+            );
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             //params.add(new BasicNameValuePair("key",value));
             //params.add(new BasicNameValuePair("hour",postHour));
-            params.add(new BasicNameValuePair("Minor",Minor));
+            params.add(new BasicNameValuePair("uuid",UUID));
+            params.add(new BasicNameValuePair("major",Major));
+            params.add(new BasicNameValuePair("minor",Minor));
 
             UrlEncodedFormEntity ent = null;
             Log.d("abc",params.toString());

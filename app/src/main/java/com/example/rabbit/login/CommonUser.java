@@ -2,6 +2,7 @@ package com.example.rabbit.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -30,8 +31,12 @@ import java.util.List;
 
 public class CommonUser extends AppCompatActivity {
 
-    EditText accountNumber,userName,password,email,phone;
-    Button done,cancel;
+    EditText accountNumber, userName, password, email, phone;
+    Button done, cancel;
+    Boolean myresult = false;
+    Handler handler = new Handler();
+    String local = "http://140.134.26.71:2048/android-backend/webapi/user/register";
+    String web = "http://140.134.26.71:42048/android-backend/webapi/user/register";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,29 +45,25 @@ public class CommonUser extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        accountNumber = (EditText)findViewById(R.id.ET_signUp_accountNumber);
-        userName = (EditText)findViewById(R.id.ET_signUp_name);
-        password = (EditText)findViewById(R.id.ET_signUp_PWD);
-        email = (EditText)findViewById(R.id.ET_signUp_email);
-        phone = (EditText)findViewById(R.id.ET_signUp_phone);
+        accountNumber = (EditText) findViewById(R.id.ET_signUp_accountNumber);
+        userName = (EditText) findViewById(R.id.ET_signUp_name);
+        password = (EditText) findViewById(R.id.ET_signUp_PWD);
+        email = (EditText) findViewById(R.id.ET_signUp_email);
+        phone = (EditText) findViewById(R.id.ET_signUp_phone);
 
-        done = (Button)findViewById(R.id.BT_signUp_done);
+        done = (Button) findViewById(R.id.BT_signUp_done);
         done.setOnClickListener(DO);
 
-        cancel = (Button)findViewById(R.id.BT_signUp_cancel);
+        cancel = (Button) findViewById(R.id.BT_signUp_cancel);
         cancel.setOnClickListener(CA);
+
+        handler.post(check);
     }
 
     public OnClickListener DO = new OnClickListener() {
         @Override
         public void onClick(View v) {
-
             onPost();
-
-            Intent intent = new Intent();
-            intent.setClass(CommonUser.this,MainActivity.class);
-            startActivity(intent);
-            finish();
         }
     };
 
@@ -70,13 +71,13 @@ public class CommonUser extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent();
-            intent.setClass(CommonUser.this,SelectAccountType.class);
+            intent.setClass(CommonUser.this, SelectAccountType.class);
             startActivity(intent);
             finish();
         }
     };
 
-    public void onPost(){
+    public void onPost() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -85,23 +86,25 @@ public class CommonUser extends AppCompatActivity {
         }).start();
     }
 
-    public void httpPost(){
-        String result = null;
+    public void httpPost() {
 
         HttpClient client = new DefaultHttpClient();
         try {
-            HttpPost post = new HttpPost("140.134.26.71:2048");
+            HttpPost post = new HttpPost(
+                    //local
+                    web
+            );
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             //params.add(new BasicNameValuePair("key",value));
             //params.add(new BasicNameValuePair("hour",postHour));
-            params.add(new BasicNameValuePair("accountNumber",accountNumber.getText().toString()));
-            params.add(new BasicNameValuePair("userName",userName.getText().toString()));
-            params.add(new BasicNameValuePair("password",password.getText().toString()));
-            params.add(new BasicNameValuePair("email",email.getText().toString()));
-            params.add(new BasicNameValuePair("phone",phone.getText().toString()));
+            params.add(new BasicNameValuePair("userAccount", accountNumber.getText().toString()));
+            params.add(new BasicNameValuePair("userName", userName.getText().toString()));
+            params.add(new BasicNameValuePair("password", password.getText().toString()));
+            params.add(new BasicNameValuePair("email", email.getText().toString()));
+            params.add(new BasicNameValuePair("phone", phone.getText().toString()));
 
             UrlEncodedFormEntity ent = null;
-            Log.d("abc",params.toString());
+            Log.d("abc", params.toString());
 
             ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
             post.setEntity(ent);
@@ -109,8 +112,8 @@ public class CommonUser extends AppCompatActivity {
             HttpEntity resEntity = responsePOST.getEntity();
 
             if (resEntity != null) {
-                result = EntityUtils.toString(resEntity);
-                Log.d("abcd",result);
+                myresult = Boolean.parseBoolean(EntityUtils.toString(resEntity));
+                Log.d("abcd", myresult.toString());
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -123,13 +126,27 @@ public class CommonUser extends AppCompatActivity {
         }
     }
 
+    private Runnable check = new Runnable() {//結果寫在這
+        @Override
+        public void run() {
+            if(myresult) {
+                Intent intent = new Intent();
+                intent.setClass(CommonUser.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                handler.removeCallbacks(check);
+            }
+            else{
+                handler.postDelayed(check,3000);
+            }
+        }
+    };
+
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        if (keyCode == KeyEvent.KEYCODE_BACK )
-        {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             Intent intent = new Intent();
-            intent.setClass(CommonUser.this,SelectAccountType.class);
+            intent.setClass(CommonUser.this, SelectAccountType.class);
             startActivity(intent);
             finish();
         }
