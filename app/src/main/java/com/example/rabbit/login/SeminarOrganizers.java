@@ -133,7 +133,7 @@ public class SeminarOrganizers extends AppCompatActivity {
 
         HttpClient client = new DefaultHttpClient();
         try {
-            HttpPost post = new HttpPost("http://192.168.2.59:8080/android-backend/webapi/food/add");
+            HttpPost post = new HttpPost("140.134.26.71:2048");
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             //params.add(new BasicNameValuePair("key",value));
             //params.add(new BasicNameValuePair("hour",postHour));
