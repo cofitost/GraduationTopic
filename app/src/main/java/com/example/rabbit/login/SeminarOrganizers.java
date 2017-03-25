@@ -11,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -32,8 +33,9 @@ import java.util.List;
 
 public class SeminarOrganizers extends AppCompatActivity {
 
-    EditText accountNumber,userName,password,principal,email,phone;
+    EditText accountNumber,userName,password,principal,email,phone,chkpassword;
     Button done,cancel;
+    Boolean judgelengh=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class SeminarOrganizers extends AppCompatActivity {
         accountNumber = (EditText)findViewById(R.id.ET_organizersignUp_accountNumber);
         userName = (EditText)findViewById(R.id.ET_organizersignUp_name);
         password = (EditText)findViewById(R.id.ET_organizersignUp_PWD);
+        chkpassword = (EditText)findViewById(R.id.ET_organizersignUp_checkPWD);
         email = (EditText)findViewById(R.id.ET_organizersignUp_email);
         phone = (EditText)findViewById(R.id.ET_organizersignUp_phone);
         principal = (EditText)findViewById(R.id.ET_organizersignUp_principal);
@@ -61,11 +64,48 @@ public class SeminarOrganizers extends AppCompatActivity {
         public void onClick(View v) {
 
             onPost();
+            if (accountNumber.length() > 5) {
+                Toast.makeText(SeminarOrganizers.this,
+                        "please type accountMumber  in 5 words", Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent();
-            intent.setClass(SeminarOrganizers.this,MainActivity.class);
-            startActivity(intent);
-            finish();
+                Intent intent = new Intent();
+                intent.setClass(SeminarOrganizers.this,SeminarOrganizers.class);
+                startActivity(intent);
+                finish();
+            } else if (userName.length() > 12 || password.length() > 12) {
+                Toast.makeText(SeminarOrganizers.this,
+                        "please type organizersName in 8~12 words", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent();
+                intent.setClass(SeminarOrganizers.this,SeminarOrganizers.class);
+                startActivity(intent);
+                finish();
+            } else if (phone.length() > 10) {
+                Toast.makeText(SeminarOrganizers.this,
+                        "please type phone 10 words", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent();
+                intent.setClass(SeminarOrganizers.this,SeminarOrganizers.class);
+                startActivity(intent);
+                finish();
+            } else if(chkpassword.equals(password))
+            {
+                Toast.makeText(SeminarOrganizers.this,
+                        "please type password again", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent();
+                intent.setClass(SeminarOrganizers.this,SeminarOrganizers.class);
+                startActivity(intent);
+                finish();
+            }
+            else {
+                judgelengh = true;
+            }
+
+            if(judgelengh)
+            {
+                Intent intent = new Intent();
+                intent.setClass(SeminarOrganizers.this,MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
     };
 

@@ -21,4 +21,7 @@
     <string name="tv_signUp_phone">Phone</string>
     <string name="tv_organizersignUp_name">Organization Name:</string>
     <string name="tv_signUp_principal">Principal:</string>
+    <string name="title_activity_meetinglist">meetinglist</string>
+    <string name="new_meeting">Added new meeting</string>
+
 </resources>
