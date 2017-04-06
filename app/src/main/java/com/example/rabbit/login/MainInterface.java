@@ -112,8 +112,8 @@ public class MainInterface extends AppCompatActivity implements BeaconConsumer{
         HttpClient client = new DefaultHttpClient();
         try {
             HttpPost post = new HttpPost(
-                    local
-                    //web
+                    //local
+                    web
             );
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             //params.add(new BasicNameValuePair("key",value));
