@@ -141,16 +141,15 @@ public class MainActivity extends AppCompatActivity {
     private Runnable check = new Runnable() {//結果寫在這
         @Override
         public void run() {
-            if(result) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this,MainInterface.class);
-                startActivity(intent);
-                finish();
-                handler.removeCallbacks(check);
-            }
-            else{
-                handler.postDelayed(check,3000);
-            }
+                if (result) {
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this, MainInterface.class);
+                    startActivity(intent);
+                    finish();
+                    handler.removeCallbacks(check);
+                } else {
+                    handler.postDelayed(check, 3000);
+                }
         }
     };
 
