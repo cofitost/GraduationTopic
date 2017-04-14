@@ -179,15 +179,15 @@ public class CommonUser extends AppCompatActivity {
     private Runnable check = new Runnable() {//結果寫在這
         @Override
         public void run() {
-            if (myresult != null) {
+            if (myresult.equals("false")) {
+                Toast.makeText(CommonUser.this,"帳號重複",Toast.LENGTH_LONG).show();
+            }
+            else if(myresult != null){
                 Intent intent = new Intent();
                 intent.setClass(CommonUser.this, MainActivity.class);
                 startActivity(intent);
                 finish();
                 handler.removeCallbacks(check);
-            }
-            else if(myresult.equals("false")){
-                Toast.makeText(CommonUser.this,"帳號重複",Toast.LENGTH_LONG).show();
             }
             else {
                 handler.postDelayed(check, 3000);

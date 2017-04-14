@@ -2,7 +2,7 @@
     <string name="app_name">Login</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_add_member">AddMember</string>
-    <string name="tv_ID">ID:</string>
+    <string name="tv_AccountNumber">Acocount Number:</string>
     <string name="tv_PWD">Password:</string>
     <string name="BT_login">Login</string>
     <string name="BT_refresh">Refresh</string>
