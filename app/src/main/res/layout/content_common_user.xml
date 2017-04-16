@@ -38,7 +38,8 @@
                 android:layout_below="@+id/tv_signUp_accountNumber"
                 android:layout_alignLeft="@+id/tv_signUp_accountNumber"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="25sp"/>
+                android:layout_marginEnd="25sp"
+                android:inputType="number"/>
 
             <TextView
                 android:id="@+id/tv_signUp_name"
@@ -145,7 +146,8 @@
                 android:layout_below="@+id/tv_signUp_phone"
                 android:layout_alignLeft="@+id/tv_signUp_accountNumber"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="25sp"/>
+                android:layout_marginEnd="25sp"
+                android:inputType="phone"/>
 
             <Button
                 android:id="@+id/BT_signUp_done"
@@ -171,6 +173,18 @@
                 android:layout_marginRight="30sp"
                 android:background="#9955FF"
                 android:textColor="#FFFFFF"/>
+
+            <Button
+                android:id="@+id/BT_signUp_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/BT_signUp_check"
+                android:textSize="18sp"
+                android:textAllCaps="false"
+                android:layout_alignParentRight="true"
+                android:background="#9955FF"
+                android:textColor="#FFFFFF"
+                />
 
         </RelativeLayout>
 

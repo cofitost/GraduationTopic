@@ -14,6 +14,7 @@
     <string name="tv_signUp_email">E-mail:</string>
     <string name="BT_signUp_done">Done</string>
     <string name="BT_signUp_cancel">Cancel</string>
+    <string name="BT_signUp_check">Checkacount</string>
     <string name="title_activity_select_account_type">SelectAccountType</string>
     <string name="BT_commonUser">Common User</string>
     <string name="BT_seminarOrganizers">Seminar Organizers</string>

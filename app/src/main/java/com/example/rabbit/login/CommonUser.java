@@ -33,8 +33,10 @@ import java.util.List;
 public class CommonUser extends AppCompatActivity {
 
     boolean judgelengh=false;
+    Boolean accountok = false,nameok = false,passwordok = false,chkpasswordok = false;
+    Boolean emailok = false,phoneok = false;
     EditText accountNumber, userName, password, email, phone,chkpassword;
-    Button done, cancel;
+    Button done, cancel,checkacount;
     String myresult = "true";
     Handler handler = new Handler();
     String local = "http://140.134.26.71:2048/android-backend/webapi/user/register";
@@ -56,6 +58,7 @@ public class CommonUser extends AppCompatActivity {
         accountNumber = (EditText) findViewById(R.id.ET_signUp_accountNumber);
         userName = (EditText) findViewById(R.id.ET_signUp_name);
         password = (EditText) findViewById(R.id.ET_signUp_PWD);
+        chkpassword = (EditText)findViewById(R.id.ET_signUp_checkPWD);
         email = (EditText) findViewById(R.id.ET_signUp_email);
         phone = (EditText) findViewById(R.id.ET_signUp_phone);
 
@@ -65,55 +68,30 @@ public class CommonUser extends AppCompatActivity {
         cancel = (Button) findViewById(R.id.BT_signUp_cancel);
         cancel.setOnClickListener(CA);
 
+        checkacount = (Button)findViewById(R.id.BT_signUp_check);
+        checkacount.setOnClickListener(CH);
+
     }
 
     public OnClickListener DO = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            onPost();
-            handler.post(check);
-            /*if (accountNumber.length() > 5) {
-                Toast.makeText(CommonUser.this,
-                        "please type accountMumber  in 5 words", Toast.LENGTH_LONG).show();
-
-                Intent intent = new Intent();
-                intent.setClass(CommonUser.this,CommonUser.class);
-                startActivity(intent);
-                finish();
-            } else if (userName.length() > 12 || password.length() > 12) {
-                Toast.makeText(CommonUser.this,
-                        "please type userName in 8~12 words", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent();
-                intent.setClass(CommonUser.this,CommonUser.class);
-                startActivity(intent);
-                finish();
-            } else if (phone.length() > 10) {
-                Toast.makeText(CommonUser.this,
-                        "please type phone 10 words", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent();
-                intent.setClass(CommonUser.this,CommonUser.class);
-                startActivity(intent);
-                finish();
-            } else if(chkpassword.equals(password))
+            if(judgelengh)
             {
-                Toast.makeText(CommonUser.this,
-                        "please type password again", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent();
-                intent.setClass(CommonUser.this,CommonUser.class);
-                startActivity(intent);
-                finish();
-            }
-            else {
-                judgelengh = true;
-            }
-
-            if (judgelengh)
-            {
+                onPost();
+                onPost();
+                handler.post(check);
                 Intent intent = new Intent();
                 intent.setClass(CommonUser.this,MainActivity.class);
                 startActivity(intent);
                 finish();
-            }*/
+            }
+            else
+            {
+                Toast.makeText(CommonUser.this,
+                        "please checkaccount first", Toast.LENGTH_LONG).show();
+            }
+
         }
     };
 
@@ -124,6 +102,69 @@ public class CommonUser extends AppCompatActivity {
             intent.setClass(CommonUser.this, SelectAccountType.class);
             startActivity(intent);
             finish();
+        }
+    };
+
+    public OnClickListener CH = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(!judgelengh) {
+                if (accountNumber.length() > 5 || accountNumber.length() == 0) {
+                    Toast.makeText(CommonUser.this,
+                            "please type accountMumber  in 5 words", Toast.LENGTH_LONG).show();
+
+                } else {
+                    accountok = true;
+                }
+                if (userName.length() > 12 || userName.length() < 8) {
+                    Toast.makeText(CommonUser.this,
+                            "please type userName in 8~12 words", Toast.LENGTH_LONG).show();
+                } else {
+                    nameok = true;
+                }
+
+                if (password.length() > 12 || password.length() < 8) {
+                    Toast.makeText(CommonUser.this,
+                            "please type password in 8~12 words", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    passwordok = true;
+                }
+                if (chkpassword.getText().toString().trim().equals(password.getText().toString().trim())) {
+                    chkpasswordok = true;
+                }
+                else
+                {
+                    Toast.makeText(CommonUser.this,
+                            "please type password again", Toast.LENGTH_LONG).show();
+                }
+
+                if (phone.length() != 10) {
+                    Toast.makeText(CommonUser.this,
+                            "please type phone 10 words", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    phoneok = true;
+                }
+
+                if(accountok&&nameok&&passwordok&&chkpasswordok&&phoneok)
+                {
+                    judgelengh=true;
+                    Toast.makeText(CommonUser.this,
+                            "your account is ok press Done", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Intent intent = new Intent();
+                    intent.setClass(CommonUser.this, CommonUser.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+
+            }
         }
     };
 
