@@ -79,12 +79,7 @@ public class CommonUser extends AppCompatActivity {
             if(judgelengh)
             {
                 onPost();
-                onPost();
                 handler.post(check);
-                Intent intent = new Intent();
-                intent.setClass(CommonUser.this,MainActivity.class);
-                startActivity(intent);
-                finish();
             }
             else
             {
@@ -223,7 +218,7 @@ public class CommonUser extends AppCompatActivity {
             if (myresult.equals("false")) {
                 Toast.makeText(CommonUser.this,"帳號重複",Toast.LENGTH_LONG).show();
             }
-            else if(myresult != null){
+            else if(myresult != null && !myresult.equals("false")){
                 Intent intent = new Intent();
                 intent.setClass(CommonUser.this, MainActivity.class);
                 startActivity(intent);
