@@ -37,7 +37,7 @@ public class CommonUser extends AppCompatActivity {
     Boolean emailok = false,phoneok = false;
     EditText accountNumber, userName, password, email, phone,chkpassword;
     Button done, cancel,checkacount;
-    String myresult = "true";
+    String myresult = "init";
     Handler handler = new Handler();
     String local = "http://140.134.26.71:2048/android-backend/webapi/user/register";
     String web = "http://140.134.26.71:42048/android-backend/webapi/user/register";
@@ -217,8 +217,12 @@ public class CommonUser extends AppCompatActivity {
         public void run() {
             if (myresult.equals("false")) {
                 Toast.makeText(CommonUser.this,"帳號重複",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent();
+                intent.setClass(CommonUser.this, CommonUser.class);
+                startActivity(intent);
+                finish();
             }
-            else if(myresult != null && !myresult.equals("false")){
+            else if(myresult != null && !myresult.equals("false") && !myresult.equals("init")){
                 Intent intent = new Intent();
                 intent.setClass(CommonUser.this, MainActivity.class);
                 startActivity(intent);
@@ -226,7 +230,7 @@ public class CommonUser extends AppCompatActivity {
                 handler.removeCallbacks(check);
             }
             else {
-                handler.postDelayed(check, 3000);
+                handler.postDelayed(check, 1000);
             }
         }
     };

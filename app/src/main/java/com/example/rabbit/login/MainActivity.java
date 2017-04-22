@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button login,signUp,refresh;
     EditText id,password;
-    Boolean result = false;
+    String result = "init";
     Handler handler = new Handler();
     String local = "192.168.43.179:8088/android-backend/webapi/user/login";
     String web = "http://140.134.26.71:42048/android-backend/webapi/user/login" ;
@@ -124,8 +125,8 @@ public class MainActivity extends AppCompatActivity {
             HttpEntity resEntity = responsePOST.getEntity();
 
             if (resEntity != null) {
-                result = Boolean.parseBoolean(EntityUtils.toString(resEntity));
-                Log.d("checkthis2",result.toString());
+                result = EntityUtils.toString(resEntity);
+                Log.d("checkthis2",result);
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -141,14 +142,18 @@ public class MainActivity extends AppCompatActivity {
     private Runnable check = new Runnable() {//結果寫在這
         @Override
         public void run() {
-                if (result) {
+                if (result.equals("true")) {
                     Intent intent = new Intent();
                     intent.setClass(MainActivity.this, MainInterface.class);
                     startActivity(intent);
                     finish();
                     handler.removeCallbacks(check);
-                } else {
-                    handler.postDelayed(check, 3000);
+                }
+                else if(result.equals("false")){
+                    Toast.makeText(MainActivity.this, "Your acountnumber or password is wrong.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    handler.postDelayed(check, 1000);
                 }
         }
     };

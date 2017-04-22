@@ -2,6 +2,7 @@ package com.example.rabbit.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.LogRecord;
 
 
 public class SeminarOrganizers extends AppCompatActivity {
@@ -36,6 +38,8 @@ public class SeminarOrganizers extends AppCompatActivity {
     EditText accountNumber,userName,password,principal,email,phone,chkpassword;
     Button done,cancel;
     Boolean judgelengh=false;
+    String result = "init";
+    Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,48 +68,7 @@ public class SeminarOrganizers extends AppCompatActivity {
         public void onClick(View v) {
 
             onPost();
-            if (accountNumber.length() > 5) {
-                Toast.makeText(SeminarOrganizers.this,
-                        "please type accountMumber  in 5 words", Toast.LENGTH_LONG).show();
-
-                Intent intent = new Intent();
-                intent.setClass(SeminarOrganizers.this,SeminarOrganizers.class);
-                startActivity(intent);
-                finish();
-            } else if (userName.length() > 12 || password.length() > 12) {
-                Toast.makeText(SeminarOrganizers.this,
-                        "please type organizersName in 8~12 words", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent();
-                intent.setClass(SeminarOrganizers.this,SeminarOrganizers.class);
-                startActivity(intent);
-                finish();
-            } else if (phone.length() > 10) {
-                Toast.makeText(SeminarOrganizers.this,
-                        "please type phone 10 words", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent();
-                intent.setClass(SeminarOrganizers.this,SeminarOrganizers.class);
-                startActivity(intent);
-                finish();
-            } else if(chkpassword.equals(password))
-            {
-                Toast.makeText(SeminarOrganizers.this,
-                        "please type password again", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent();
-                intent.setClass(SeminarOrganizers.this,SeminarOrganizers.class);
-                startActivity(intent);
-                finish();
-            }
-            else {
-                judgelengh = true;
-            }
-
-            if(judgelengh)
-            {
-                Intent intent = new Intent();
-                intent.setClass(SeminarOrganizers.this,MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+            handler.post(check);
         }
     };
 
@@ -129,7 +92,6 @@ public class SeminarOrganizers extends AppCompatActivity {
     }
 
     public void httpPost(){
-        String result = null;
 
         HttpClient client = new DefaultHttpClient();
         try {
@@ -166,6 +128,29 @@ public class SeminarOrganizers extends AppCompatActivity {
             client.getConnectionManager().shutdown();
         }
     }
+
+    private Runnable check = new Runnable() {//結果寫在這
+        @Override
+        public void run() {
+            if (result.equals("false")) {
+                Toast.makeText(SeminarOrganizers.this,"帳號重複",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent();
+                intent.setClass(SeminarOrganizers.this, CommonUser.class);
+                startActivity(intent);
+                finish();
+            }
+            else if(result != null && !result.equals("false") && !result.equals("init")){
+                Intent intent = new Intent();
+                intent.setClass(SeminarOrganizers.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                handler.removeCallbacks(check);
+            }
+            else {
+                handler.postDelayed(check, 1000);
+            }
+        }
+    };
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
